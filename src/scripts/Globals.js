@@ -1,3 +1,3 @@
 export const Globals = {
-   resources: {}
+    resources: {}
 };
