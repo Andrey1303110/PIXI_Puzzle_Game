@@ -1,7 +1,7 @@
 export let LoaderConfig = {
-    bg: require("../sprites/bg.png"),
+    bg: require("/src/sprites/bg.png"),
 };
 
 for (let i = 1; i <= 9; i++) {
-    LoaderConfig[`puzzle${i}`] = require(`../sprites/${i}.png`);
+    LoaderConfig[`puzzle${i}`] = require(`/src/sprites/${i}.png`);
 }
