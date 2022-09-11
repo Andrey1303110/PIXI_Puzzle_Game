@@ -1,5 +1,6 @@
 import * as PIXI from "pixi.js";
 import { Globals } from "./Globals";
+import {Howl, Howler} from 'howler';
 
 export class PuzzlePiece extends PIXI.utils.EventEmitter {
     constructor(id, field) {
@@ -29,12 +30,11 @@ export class PuzzlePiece extends PIXI.utils.EventEmitter {
         };
 
         this.dragging = true;
-        
-        //Globals.resources.click.sound.play();
+        Globals.resources.sounds.click.play();
     }
 
     onTouchEnd() {
-        //Globals.resources.click.sound.play();
+        Globals.resources.sounds.click.play();
         this.dragging = false;
         this.emit('dragend');
     }

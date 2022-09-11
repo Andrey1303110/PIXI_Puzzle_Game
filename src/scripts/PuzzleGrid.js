@@ -44,7 +44,6 @@ export class PuzzleGrid {
 
         if (pieceToReplace) {
             const replaceField = pieceToReplace.field;
-            console.log(replaceField);
             pieceToReplace.setField(piece.field);
             piece.setField(replaceField);
         } else {
