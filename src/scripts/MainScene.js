@@ -1,10 +1,12 @@
 import * as PIXI from "pixi.js";
 import { Globals } from "./Globals";
+import { PuzzleGrid } from "./PuzzleGrid";
 
 export class MainScene {
     constructor() {
         this.container = new PIXI.Container();
         this.createBackground();
+        this.createPuzzleGrid();
     }
 
     createBackground() {
@@ -21,5 +23,10 @@ export class MainScene {
         this.bg.anchor.set(0.5);
 
         this.container.addChild(this.bg);
+    }
+
+    createPuzzleGrid(){
+        const grid = new PuzzleGrid();
+        this.container.addChild(grid.container);
     }
 }
