@@ -27,8 +27,6 @@ for (let i = 0; i < piece_in_height; i++) {
         } else {
             y = puzzle_sizes + gap;
         }
-
-        console.log(id, x, y);
         
         PuzzleGridConfig.push({id, x, y});
     }
