@@ -9,9 +9,17 @@ export class MainScene {
 
     createBackground() {
         this.bg = new PIXI.Sprite(Globals.resources["bg"].texture);
-        this.bg.width = window.innerWidth;
-        this.bg.height = window.innerHeight;
+
+        let ratio = Globals.resources["bg"].texture.frame.width / Globals.resources["bg"].texture.frame.height;
+
+        this.bg.width = Math.max(window.innerWidth, window.innerHeight);
+        this.bg.height = Math.max(window.innerWidth, window.innerHeight);
+
+        this.bg.x = document.body.clientWidth / 2;
+        this.bg.y = document.body.clientHeight / 2;
+
+        this.bg.anchor.set(0.5);
+
         this.container.addChild(this.bg);
     }
-
 }

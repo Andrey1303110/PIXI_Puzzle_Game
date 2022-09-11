@@ -6,7 +6,9 @@ import { Globals } from "./Globals";
 export class App {
     run() {
         // create canvas
-        this.app = new PIXI.Application({resizeTo: window});
+        this.app = new PIXI.Application({
+            resizeTo: window
+        });
         document.body.appendChild(this.app.view);
 
         Globals.app = this.app;
