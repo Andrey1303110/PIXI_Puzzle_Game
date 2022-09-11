@@ -7,6 +7,7 @@ export class MainScene {
         this.container = new PIXI.Container();
         this.createBackground();
         this.createPuzzleGrid();
+        this.addSounds();
     }
 
     createBackground() {
@@ -28,5 +29,23 @@ export class MainScene {
     createPuzzleGrid(){
         const grid = new PuzzleGrid();
         this.container.addChild(grid.container);
+    }
+
+    addSounds(){
+        Globals.resources.sounds = {
+            click: new Howl({
+                src: Globals.resources.click.url,
+                html5: true
+            }),
+            theme: new Howl({
+                src: Globals.resources.theme.url,
+                html5: true,
+                autoplay: true,
+                loop: true,
+                volume: 0.25,
+            }),
+        };
+
+
     }
 }
