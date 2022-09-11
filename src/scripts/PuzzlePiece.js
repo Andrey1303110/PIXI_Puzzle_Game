@@ -29,11 +29,13 @@ export class PuzzlePiece extends PIXI.utils.EventEmitter {
         };
 
         this.dragging = true;
+        
+        //Globals.resources.click.sound.play();
     }
 
     onTouchEnd() {
+        //Globals.resources.click.sound.play();
         this.dragging = false;
-        this.reset();
         this.emit('dragend');
     }
 
