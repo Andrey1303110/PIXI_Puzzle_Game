@@ -1,8 +1,9 @@
 import * as PIXI from "pixi.js";
 import { Globals } from "./Globals";
 
-export class PuzzlePiece {
+export class PuzzlePiece extends PIXI.utils.EventEmitter {
     constructor(id, field) {
+        super();
         this.sprite = new PIXI.Sprite(Globals.resources[`puzzle${id}`].texture);
         this.sprite.anchor.set(.5);
         this.sprite.width = document.body.clientWidth / 7;
@@ -33,6 +34,7 @@ export class PuzzlePiece {
     onTouchEnd() {
         this.dragging = false;
         this.reset();
+        this.emit('dragend');
     }
 
     onTouchMove(event) {
