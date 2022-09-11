@@ -1,7 +1,6 @@
 import * as PIXI from "pixi.js";
 import { Loader } from "./Loader";
 import { MainScene } from "./MainScene";
-import { Globals } from "./Globals";
 
 export class App {
     run() {
@@ -10,8 +9,6 @@ export class App {
             resizeTo: window
         });
         document.body.appendChild(this.app.view);
-
-        Globals.app = this.app;
 
         // load sprites
         this.loader = new Loader(this.app.loader);
