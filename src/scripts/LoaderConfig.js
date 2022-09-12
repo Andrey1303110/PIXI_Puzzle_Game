@@ -1,10 +1,11 @@
 export let LoaderConfig = {
-    bg: require("/src/sprites/bg.png"),
-    click: require("/src/sounds/click.mp3"),
-    theme: require("/src/sounds/music.mp3"),
-    win: require("/src/sounds/win.mp3"),
+    bg: require("../sprites/bg.png"),
+    bg: require("../sprites/bg.png"),
+    click: require("../sounds/click.mp3"),
+    theme: require("../sounds/music.mp3"),
+    win: require("../sounds/win.mp3"),
 };
 
 for (let i = 1; i <= 9; i++) {
-    LoaderConfig[`puzzle${i}`] = require(`/src/sprites/${i}.png`);
+    LoaderConfig[`puzzle${i}`] = require(`../sprites/${i}.png`);
 }
