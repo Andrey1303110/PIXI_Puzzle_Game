@@ -1,4 +1,5 @@
 import * as PIXI from "pixi.js";
+import TWEEN from "@tweenjs/tween.js";
 import { Globals } from "./Globals";
 import {Howl, Howler} from 'howler';
 
@@ -18,6 +19,7 @@ export class PuzzlePiece extends PIXI.utils.EventEmitter {
     setInteractive() {
         this.sprite.interactive = true;
         this.sprite.on('pointerdown', this.onTouchStart, this);
+        //this.sprite.on('pointerdown', () => console.log(this.field.id));
         this.sprite.on('pointerup', this.onTouchEnd, this);
         this.sprite.on('pointermove', this.onTouchMove, this);
     }
@@ -57,8 +59,20 @@ export class PuzzlePiece extends PIXI.utils.EventEmitter {
     }
 
     reset() {
-        this.sprite.zIndex = 0;
-        this.sprite.position.copyFrom(this.field);
+        const tween = new TWEEN.Tween(this.sprite);
+        tween.to({ 
+            x: this.field.x,
+            y: this.field.y,
+        }, 325);
+        tween.onStart(() => {
+            this.sprite.zIndex = 1;
+        });
+        tween.onUpdate(() => {});
+        tween.onComplete(() => {
+            this.sprite.zIndex = 0;
+        });
+        tween.easing(TWEEN.Easing.Back.Out);
+        tween.start();
     }
 
     get left() {

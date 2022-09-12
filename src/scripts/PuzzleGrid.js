@@ -49,5 +49,7 @@ export class PuzzleGrid {
         } else {
             piece.reset();
         }
+
+        //console.log(this.pieces);
     }
 }
