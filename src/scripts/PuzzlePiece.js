@@ -11,6 +11,7 @@ export class PuzzlePiece extends PIXI.utils.EventEmitter {
         this.sprite.width = document.body.clientWidth / 7;
         this.sprite.height = document.body.clientWidth / 7;
         this.field = field;
+        this.sprite.correctId = id;
         this.reset();
 
         this.setInteractive();
@@ -19,7 +20,6 @@ export class PuzzlePiece extends PIXI.utils.EventEmitter {
     setInteractive() {
         this.sprite.interactive = true;
         this.sprite.on('pointerdown', this.onTouchStart, this);
-        //this.sprite.on('pointerdown', () => console.log(this.field.id));
         this.sprite.on('pointerup', this.onTouchEnd, this);
         this.sprite.on('pointermove', this.onTouchMove, this);
     }

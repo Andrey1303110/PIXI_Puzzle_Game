@@ -37,12 +37,16 @@ export class MainScene {
                 src: Globals.resources.click.url,
                 html5: true
             }),
+            win: new Howl({
+                src: Globals.resources.win.url,
+                html5: true
+            }),
             theme: new Howl({
                 src: Globals.resources.theme.url,
                 html5: true,
                 autoplay: true,
                 loop: true,
-                volume: 0.25,
+                volume: 0.2,
             }),
         };
 

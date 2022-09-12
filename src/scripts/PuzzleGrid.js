@@ -1,4 +1,7 @@
 import * as PIXI from "pixi.js";
+import {Howl, Howler} from 'howler';
+import TWEEN from "@tweenjs/tween.js";
+import { Globals } from "./Globals";
 import { PuzzleGridConfig } from "./PuzzleGridConfig";
 import { PuzzlePiece } from "./PuzzlePiece";
 
@@ -14,14 +17,14 @@ export class PuzzleGrid {
     createPuzzlePieces(){
         this.pieces = [];
 
-        let ids = PuzzleGridConfig.map(field => field.id);
+        let ids = PuzzleGridConfig.pieces.map(field => field.id);
 
-        PuzzleGridConfig.forEach(field => {
+        PuzzleGridConfig.pieces.forEach(field => {
             const random = Math.floor(Math.random() * ids.length);
             const id = ids[random];
             ids = ids.filter(item => item !== id);
-            
-            const piece = new PuzzlePiece(id, field);
+
+            const piece = new PuzzlePiece(id, field, this.container);
             piece.on('dragend', () => this.onPieceDragEnd(piece));
 
             this.container.addChild(piece.sprite);
@@ -50,6 +53,50 @@ export class PuzzleGrid {
             piece.reset();
         }
 
-        //console.log(this.pieces);
+        setTimeout(() => {
+            this.checkPieces();
+        }, 350);
+    }
+
+    checkPieces(){
+        let correct_count = 0;
+        for (let i = 0; i < this.container.children.length; i++) {
+            const piece = this.container.children[i];
+    
+            if (piece.y === PuzzleGridConfig.pieces[piece.correctId-1].y && piece.x === PuzzleGridConfig.pieces[piece.correctId-1].x) {
+                correct_count++;
+                if (correct_count >= this.container.children.length) {
+                    Globals.resources.sounds.win.play();
+                    this.puzzleDone();
+                }
+            }
+        }
+    }
+
+    puzzleDone(){
+        for (let i = 0; i < this.container.children.length; i++) {
+            const piece = this.container.children[i];
+
+            const tween = new TWEEN.Tween(piece);
+            let pos = { x: 0, y: 0};
+            if (piece.x < 0) {
+                pos.x = piece.x + PuzzleGridConfig.gap
+            }
+            if (piece.x > 0) {
+                pos.x = piece.x - PuzzleGridConfig.gap
+            }
+            if (piece.y < 0) {
+                pos.y = piece.y + PuzzleGridConfig.gap
+            }
+            if (piece.y > 0) {
+                pos.y = piece.y - PuzzleGridConfig.gap
+            }
+            tween.to({ 
+                x: pos.x,
+                y: pos.y,
+            }, 325);
+            tween.easing(TWEEN.Easing.Back.Out);
+            tween.start();
+        }
     }
 }
